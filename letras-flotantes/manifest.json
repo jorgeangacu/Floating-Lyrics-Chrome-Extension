@@ -1,0 +1,52 @@
+{
+  "manifest_version": 3,
+  "name": "Letras Flotantes",
+  "version": "1.0.0",
+  "description": "Muestra la letra sincronizada de lo que suena en Chrome (música o video), flotando encima de cualquier pestaña.",
+  "permissions": ["storage", "scripting"],
+  "host_permissions": ["<all_urls>"],
+  "background": {
+    "service_worker": "src/background.js"
+  },
+  "action": {
+    "default_title": "Mostrar letras (Alt+Shift+L)",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "commands": {
+    "toggle-overlay": {
+      "suggested_key": { "default": "Alt+Shift+L" },
+      "description": "Mostrar u ocultar las letras"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["src/media-main.js"],
+      "run_at": "document_start",
+      "all_frames": true,
+      "world": "MAIN"
+    },
+    {
+      "matches": ["<all_urls>"],
+      "js": ["src/media-bridge.js"],
+      "run_at": "document_start",
+      "all_frames": true
+    },
+    {
+      "matches": ["<all_urls>"],
+      "js": ["src/overlay.js"],
+      "run_at": "document_start"
+    }
+  ]
+}

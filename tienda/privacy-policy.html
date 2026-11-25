@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Letras Flotantes — Política de privacidad</title>
+<style>
+  :root { --bg: #ffffff; --fg: #1d1d1f; --muted: #6e6e73; --accent: #fa2d48; }
+  @media (prefers-color-scheme: dark) { :root { --bg: #111114; --fg: #f5f5f7; --muted: #a1a1a6; } }
+  body { margin: 0; background: var(--bg); color: var(--fg); font: 16px/1.6 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  main { max-width: 720px; margin: 0 auto; padding: 48px 16px 64px; }
+  h1 { font-size: 28px; margin: 0 0 4px; }
+  h2 { font-size: 19px; margin: 32px 0 8px; }
+  .muted { color: var(--muted); }
+  hr { border: 0; border-top: 1px solid rgba(128,128,128,.25); margin: 48px 0; }
+  code { font-size: 14px; }
+  a { color: var(--accent); }
+</style>
+</head>
+<body>
+<main>
+<h1>Letras Flotantes — Política de privacidad</h1>
+<p class="muted">Última actualización: 24 de noviembre de 2026</p>
+
+<p>Letras Flotantes es una extensión de Chrome que muestra la letra sincronizada de la música o el video que se reproduce en el navegador. Esta política explica qué datos usa y para qué.</p>
+
+<h2>Datos que se usan</h2>
+<ul>
+  <li><strong>Información de la reproducción actual:</strong> título, artista, álbum, duración, carátula y posición de reproducción del audio o video que suena en una pestaña. Se obtienen de la página (Media Session API y elementos <code>&lt;audio&gt;</code>/<code>&lt;video&gt;</code>).</li>
+  <li><strong>Preferencias:</strong> si la tarjeta está visible, su posición, el tamaño del texto, el modo transparente y el ajuste de sincronía por canción. Se guardan solo en tu navegador (<code>chrome.storage</code>).</li>
+</ul>
+
+<h2>Datos que se envían a terceros</h2>
+<p>Solo cuando la tarjeta de letras está activada, la extensión envía el <strong>título, el artista y la duración</strong> de la canción a estos servicios públicos de letras para buscarla:</p>
+<ul>
+  <li><a href="https://lrclib.net">LRCLIB</a> (lrclib.net)</li>
+  <li>NetEase Cloud Music (music.163.com), como respaldo si LRCLIB no responde o no tiene la letra</li>
+</ul>
+<p>No se envía ningún otro dato: ni direcciones de páginas, ni historial, ni identificadores personales, ni datos de cuenta.</p>
+
+<h2>Lo que la extensión no hace</h2>
+<ul>
+  <li>No recopila datos personales ni el historial de navegación.</li>
+  <li>No usa analíticas, rastreadores ni publicidad.</li>
+  <li>No vende ni comparte datos con terceros, salvo la consulta de letras descrita arriba.</li>
+  <li>No lee el contenido de las páginas más allá de la información de reproducción.</li>
+</ul>
+
+<h2>Permisos</h2>
+<ul>
+  <li><strong>Acceso a todos los sitios:</strong> necesario para detectar qué se reproduce en cualquier sitio de música o video y para mostrar la tarjeta encima de cualquier pestaña.</li>
+  <li><strong>storage:</strong> guardar tus preferencias en el navegador.</li>
+  <li><strong>scripting:</strong> activar la extensión en las pestañas que ya estaban abiertas al instalarla.</li>
+</ul>
+
+<h2>Contacto</h2>
+<p>Para preguntas sobre esta política: <a href="mailto:jorgewalterangulo@gmail.com">jorgewalterangulo@gmail.com</a> (Jorge Angulo)</p>
+
+<hr>
+
+<h1>Letras Flotantes — Privacy Policy</h1>
+<p class="muted">Last updated: November 24, 2026</p>
+<p>Letras Flotantes is a Chrome extension that shows synced lyrics for the music or video playing in the browser.</p>
+<h2>Data used</h2>
+<ul>
+  <li><strong>Now-playing information</strong> (title, artist, album, duration, artwork, playback position), read from the page via the Media Session API and media elements.</li>
+  <li><strong>Preferences</strong> (visibility, position, text size, transparent mode, per-song sync offset), stored locally with <code>chrome.storage</code>.</li>
+</ul>
+<h2>Data shared</h2>
+<p>Only while the lyrics card is turned on, the song's <strong>title, artist and duration</strong> are sent to LRCLIB (lrclib.net) and, as a fallback, NetEase Cloud Music (music.163.com) to look up lyrics. Nothing else is sent.</p>
+<h2>What it does not do</h2>
+<p>No personal data or browsing history is collected. No analytics, tracking or ads. Data is not sold or shared beyond the lyrics lookup above.</p>
+<h2>Contact</h2>
+<p><a href="mailto:jorgewalterangulo@gmail.com">jorgewalterangulo@gmail.com</a> (Jorge Angulo)</p>
+</main>
+</body>
+</html>
