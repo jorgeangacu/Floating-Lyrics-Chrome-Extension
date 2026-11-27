@@ -25,10 +25,10 @@ jobs:
       SIGNPATH_API_TOKEN: ${{ secrets.SIGNPATH_API_TOKEN }}
     steps:
       - name: Obtener el código
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Instalar .NET 10
-        uses: actions/setup-dotnet@v4
+        uses: actions/setup-dotnet@v6
         with:
           dotnet-version: '10.0.x'
 
@@ -54,7 +54,7 @@ jobs:
       # SignPath toma el .exe desde un artefacto de esta ejecución.
       - name: Subir el .exe sin firmar
         id: upload-unsigned
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: FloatingLyrics-sin-firmar
           path: dist/FloatingLyrics.exe
@@ -88,7 +88,7 @@ jobs:
         run: echo "::warning::SignPath no está configurado; el .exe se publica SIN firmar."
 
       - name: Guardar los archivos de la versión
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: version
           path: |
@@ -97,7 +97,7 @@ jobs:
 
       - name: Adjuntar los archivos al Release
         if: github.event_name == 'release'
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           tag_name: ${{ github.event.release.tag_name }}
           files: |
