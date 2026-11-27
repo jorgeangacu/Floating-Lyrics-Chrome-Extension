@@ -29,7 +29,13 @@ Funciona con YouTube, YouTube Music, Spotify Web, SoundCloud, Deezer y la mayor�
 
 ## Instalación
 
-### Desde el código (modo desarrollador)
+### App para Windows (cualquier reproductor, aunque Chrome esté minimizado)
+
+Descarga `FloatingLyrics.exe` desde **Releases** y ábrelo. Lee lo que suena en cualquier aplicación de
+Windows (Chrome, Edge, Spotify…) y muestra la letra en una tarjeta siempre visible. Se maneja desde el
+icono de la bandeja del sistema o con `Ctrl+Alt+L`. Detalles en [`windows-app/`](windows-app/README.md).
+
+### Extensión de Chrome, desde el código (modo desarrollador)
 
 1. Descarga este repositorio (**Code → Download ZIP**) y descomprímelo.
 2. Abre `chrome://extensions` y activa **Modo de desarrollador** (arriba a la derecha).
@@ -70,9 +76,15 @@ Política completa: [`docs/index.html`](docs/index.html).
 
 ```
 letras-flotantes/   La extensión (lo que se carga en Chrome y se empaqueta para la tienda)
+windows-app/        La app de escritorio para Windows (.NET 10 + WebView2)
 docs/               Política de privacidad (publicable con GitHub Pages)
 tienda/             Recursos para la Chrome Web Store: capturas, mosaico y textos de la ficha
 ```
+
+## Firma de código
+
+Free code signing provided by [SignPath.io](https://about.signpath.io/), certificate by [SignPath Foundation](https://signpath.org/).
+Detalles en la [política de firma de código](CODE_SIGNING_POLICY.md).
 
 ## Licencia
 

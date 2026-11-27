@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+  Configuración de artefacto para SignPath (copiar en el proyecto de SignPath como
+  configuración por defecto). GitHub sube el .exe dentro de un ZIP; SignPath firma
+  FloatingLyrics.exe con Authenticode y devuelve el ZIP con el .exe firmado.
+-->
+<artifact-configuration xmlns="http://signpath.io/artifact-configuration/v1">
+  <zip-file>
+    <pe-file path="FloatingLyrics.exe">
+      <authenticode-sign />
+    </pe-file>
+  </zip-file>
+</artifact-configuration>

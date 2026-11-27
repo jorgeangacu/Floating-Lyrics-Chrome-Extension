@@ -258,10 +258,11 @@ async function neteaseLyrics(track) {
     }
     if (rank(cands, want0).some((c) => c.r.s >= 8)) break;
   }
-  let plainRes = null;
+  let plainRes = null, tried = 0, failed = 0, lastErr = null;
   for (const { item } of rank(cands, want0).slice(0, 5)) {
     let j;
-    try { j = await neJson(`${NE}/song/lyric?id=${item.id}&lv=1&tv=-1`); } catch (_) { continue; }
+    tried++;
+    try { j = await neJson(`${NE}/song/lyric?id=${item.id}&lv=1&tv=-1`); } catch (e) { failed++; lastErr = e; continue; }
     const lrc = (j.lrc && j.lrc.lyric) || '';
     if (!lrc.trim()) continue;
     const meta = { title: item.trackName, artist: item.artistName, duration: item.duration || 0 };
@@ -270,6 +271,8 @@ async function neteaseLyrics(track) {
     const plain = lrc.split(/\r?\n/).filter((l) => l.trim() && !CREDIT.test(l.trim())).join('\n');
     if (plain && !plainRes) plainRes = { status: 'plain', text: plain, meta };
   }
+  // Si NetEase rechazó todas las descargas (p. ej. límite de consultas), es un error, no "sin letra".
+  if (!plainRes && tried > 0 && failed === tried) throw lastErr;
   return plainRes || { status: 'none', candidates: cands.length };
 }
 

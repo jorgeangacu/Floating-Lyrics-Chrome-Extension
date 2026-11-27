@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Letras Flotantes</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<div class="card" id="card">
+  <div class="backdrop"><div class="tint"></div><div class="bg" id="bg"></div><div class="shade"></div></div>
+  <div class="head" id="head">
+    <div class="art" id="art"></div>
+    <div class="meta"><div class="title" id="title">Letras Flotantes</div><div class="artist" id="artist">Esperando reproducción…</div></div>
+    <div class="ctrls" id="ctrls">
+      <button data-act="minus" title="Retrasar letra 0.5 s">−</button>
+      <span class="off" id="off" title="Ajuste de sincronía para esta canción">0.0 s</span>
+      <button data-act="plus" title="Adelantar letra 0.5 s">+</button>
+      <button data-act="size" title="Tamaño del texto">Aa</button>
+      <button data-act="ghost" id="ghostBtn" title="Modo transparente">◐</button>
+    </div>
+  </div>
+  <div class="viewport" id="viewport"><div class="lines" id="lines"></div></div>
+  <div class="status" id="status"></div>
+  <div class="fail" id="fail"><div class="detail" id="detail"></div><button class="retry" id="retry">Reintentar</button></div>
+  <div class="progress hidden" id="progress"><div class="bar" id="bar"></div></div>
+</div>
+<script src="lyrics.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

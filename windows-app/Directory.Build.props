@@ -1,0 +1,8 @@
+<Project>
+  <!-- Los archivos de compilación van fuera de la carpeta del proyecto (que está en OneDrive),
+       para no sincronizar miles de archivos temporales. -->
+  <PropertyGroup>
+    <BaseOutputPath>$(LOCALAPPDATA)\FloatingLyricsDev\build\bin\</BaseOutputPath>
+    <BaseIntermediateOutputPath>$(LOCALAPPDATA)\FloatingLyricsDev\build\obj\</BaseIntermediateOutputPath>
+  </PropertyGroup>
+</Project>

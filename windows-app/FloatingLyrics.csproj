@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows10.0.19041.0</TargetFramework>
+    <SupportedOSPlatformVersion>10.0.19041.0</SupportedOSPlatformVersion>
+    <UseWindowsForms>true</UseWindowsForms>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AssemblyName>FloatingLyrics</AssemblyName>
+    <RootNamespace>FloatingLyrics</RootNamespace>
+    <ApplicationIcon>app.ico</ApplicationIcon>
+    <ApplicationHighDpiMode>PerMonitorV2</ApplicationHighDpiMode>
+    <Version>1.0.0</Version>
+    <Product>Letras Flotantes</Product>
+    <Company>Jorge Angulo</Company>
+    <Copyright>© 2026 Jorge Angulo</Copyright>
+    <Description>Letras sincronizadas flotantes para lo que suena en Windows</Description>
+    <!-- No copiar la documentación XML de los paquetes junto al .exe -->
+    <AllowedReferenceRelatedFileExtensions>.pdb</AllowedReferenceRelatedFileExtensions>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.*" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- La interfaz (HTML/CSS/JS) va dentro del .exe y se sirve a WebView2 desde memoria. -->
+    <EmbeddedResource Include="web\*" LogicalName="web.%(Filename)%(Extension)" />
+    <EmbeddedResource Include="app.ico" LogicalName="app.ico" />
+  </ItemGroup>
+
+</Project>

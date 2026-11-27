@@ -88,8 +88,9 @@ Todo el código JavaScript está incluido en el paquete. Solo se descargan datos
 - [x] No uso ni transfiero datos de usuarios para fines ajenos al propósito único del elemento.
 - [x] No uso ni transfiero datos de usuarios para determinar su solvencia ni para préstamos.
 
-**URL de la política de privacidad:** la de GitHub Pages, por ejemplo
-`https://TU-USUARIO.github.io/letras-flotantes/` (publica la carpeta `docs/` del repositorio).
+**URL de la política de privacidad:**
+`https://jorgeangacu.github.io/Floating-Lyrics-Chrome-Extension/`
+(GitHub Pages publicando la carpeta `docs/` de la rama `main`).
 
 ---
 

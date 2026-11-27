@@ -1,0 +1,130 @@
+/* Misma tarjeta que la extensión de Chrome, ocupando toda la ventana (que es transparente). */
+:root { color-scheme: dark; }
+* { box-sizing: border-box; }
+html, body { margin: 0; background: transparent; overflow: hidden; }
+body { padding: 14px; } /* margen para la sombra de la tarjeta */
+
+.card {
+  --fs: 26px; --w: 390px;
+  position: relative;
+  width: var(--w);
+  color: #fff;
+  font-family: "Segoe UI Variable Display", "Segoe UI", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  border-radius: 24px; overflow: hidden; isolation: isolate;
+  box-shadow: 0 10px 30px rgba(0,0,0,.40), 0 2px 8px rgba(0,0,0,.25), inset 0 0 0 1px rgba(255,255,255,.09);
+  user-select: none;
+  animation: lf-in .55s cubic-bezier(.2,.9,.25,1);
+  transition: box-shadow .9s ease;
+}
+@keyframes lf-in { from { opacity: 0; transform: translateY(-10px) scale(.96); } }
+
+/* Capa de fondo: color oscuro + colores de la carátula + sombreado. Sin el desenfoque del
+   navegador, el color de fondo es algo más opaco que en la extensión para que se lea bien. */
+.backdrop {
+  position: absolute; inset: 0; z-index: -1; overflow: hidden; border-radius: 24px;
+  filter: blur(0px);
+  transition: inset .9s ease, border-radius .9s ease, filter .9s ease;
+}
+.tint { position: absolute; inset: 0; background: rgb(20, 20, 28); opacity: .82; transition: opacity .9s ease; }
+.bg {
+  position: absolute; inset: -45%;
+  background-size: cover; background-position: center;
+  filter: blur(48px) saturate(1.9) brightness(.75);
+  opacity: 0; transition: opacity 1.2s ease;
+  animation: lf-spin 38s linear infinite;
+}
+.bg.on { opacity: .9; }
+.shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,.12), rgba(0,0,0,.38)); transition: opacity .9s ease; }
+@keyframes lf-spin { to { transform: rotate(360deg) scale(1.1); } }
+
+/* Modo transparente: fondo al 40 % con bordes difuminados y redondeados, sin barra de tiempo;
+   la letra y la cabecera al 80 %. Al pasar el mouse vuelve despacio a la normalidad. */
+.head, .viewport, .progress, .status, .fail { transition: opacity .9s ease, filter .9s ease, height .6s cubic-bezier(.2,.9,.25,1), margin .25s ease; }
+.card.ghost:not(:hover) { box-shadow: 0 10px 30px rgba(0,0,0,0), 0 2px 8px rgba(0,0,0,0), inset 0 0 0 1px rgba(255,255,255,0); }
+.card.ghost:not(:hover) .backdrop { inset: 20px; border-radius: 34px; filter: blur(11px); }
+.card.ghost:not(:hover) .tint { opacity: calc(.58 * .4); }
+.card.ghost:not(:hover) .bg.on { opacity: calc(.95 * .4); }
+.card.ghost:not(:hover) .shade { opacity: .4; }
+.card.ghost:not(:hover) .progress { opacity: 0; }
+.card.ghost:not(:hover) :is(.head, .viewport, .status, .fail) { opacity: .8; filter: drop-shadow(0 1px 2px rgba(0,0,0,.55)); }
+.card.ghost:not(:hover) .line.next { opacity: .72; }
+
+.head { position: relative; display: flex; align-items: center; gap: 10px; padding: 12px 12px 2px 14px; cursor: grab; }
+.head:active { cursor: grabbing; }
+.art { width: 38px; height: 38px; flex: none; border-radius: 8px; background: rgba(255,255,255,.12) center / cover no-repeat; box-shadow: 0 4px 14px rgba(0,0,0,.35); }
+.meta { min-width: 0; flex: 1; }
+.title, .artist { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.title { font-size: 13px; font-weight: 650; letter-spacing: -.005em; }
+.artist { font-size: 12px; opacity: .62; margin-top: 1px; }
+
+/* Controles: flotan sobre la cabecera y aparecen al pasar el mouse. */
+.ctrls {
+  position: absolute; right: 10px; top: 50%; transform: translateY(-40%);
+  display: flex; align-items: center; gap: 1px; padding: 2px 4px; border-radius: 999px;
+  background: rgba(28, 28, 36, .9); box-shadow: 0 4px 14px rgba(0,0,0,.3);
+  opacity: 0; pointer-events: none; transition: opacity .25s ease;
+}
+.card:hover .ctrls { opacity: 1; pointer-events: auto; }
+button {
+  all: unset; cursor: pointer; width: 26px; height: 26px; border-radius: 50%;
+  display: grid; place-items: center; font: 600 12px/1 "Segoe UI", system-ui, sans-serif; color: rgba(255,255,255,.88);
+  transition: background .2s ease;
+}
+button:hover { background: rgba(255,255,255,.16); }
+button.on { background: rgba(255,255,255,.22); }
+.off { font: 600 10.5px/1 "Segoe UI", system-ui, sans-serif; opacity: .7; min-width: 34px; text-align: center; font-variant-numeric: tabular-nums; }
+
+.viewport {
+  position: relative; overflow: hidden; height: 110px; padding: 0 22px;
+  transition: height .6s cubic-bezier(.2,.9,.25,1), opacity .4s ease;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 6px, #000 calc(100% - 12px), transparent 100%);
+          mask-image: linear-gradient(to bottom, transparent 0, #000 6px, #000 calc(100% - 12px), transparent 100%);
+}
+.card.paused .viewport { opacity: .62; }
+.lines { --y: 0px; position: relative; }
+.line {
+  font-size: var(--fs); line-height: 1.2; font-weight: 700; letter-spacing: -.012em;
+  padding: 6px 0; overflow-wrap: anywhere; cursor: pointer;
+  transform-origin: left center;
+  transform: translate3d(0, calc(var(--y) * -1), 0) scale(.955);
+  opacity: .22;
+  filter: blur(var(--blur, 0px)) drop-shadow(0 0 var(--glow, 0px) rgba(255,255,255,.35));
+  transition: transform .85s cubic-bezier(.19,.86,.24,1) var(--delay, 0ms), opacity .55s ease, filter .55s ease;
+  will-change: transform;
+}
+.line.past { opacity: .16; }
+.line.next { opacity: .48; }
+.line.active { opacity: 1; --glow: 10px; transform: translate3d(0, calc(var(--y) * -1), 0) scale(1); }
+.line:not(.active):hover { opacity: .7; --blur: 0px !important; }
+.w { color: #fff; }
+.line.active .w {
+  display: inline-block; color: transparent;
+  background: linear-gradient(90deg, #fff calc(var(--wp, 0) * 125% - 25%), rgba(255,255,255,.38) calc(var(--wp, 0) * 125%));
+  -webkit-background-clip: text; background-clip: text;
+  transform: translateY(calc(var(--wp, 0) * -1.5px));
+  transition: transform .3s ease;
+}
+.line.gap { padding: 14px 0 12px; }
+.dots { display: flex; gap: 8px; transform-origin: left center; animation: lf-breathe 2.6s ease-in-out infinite; transition: transform .45s ease, opacity .45s ease; }
+.dot { width: calc(var(--fs) * .36); height: calc(var(--fs) * .36); border-radius: 50%; background: #fff; opacity: calc(.28 + .72 * var(--d, 0)); }
+.line.gap.ending .dots { transform: scale(1.25); opacity: 0; animation: none; }
+@keyframes lf-breathe { 50% { transform: scale(1.12); } }
+
+.lines.plain .line { transform: none; opacity: .85; filter: none; font-size: calc(var(--fs) * .66); font-weight: 650; padding: 3px 0; cursor: default; }
+.viewport.plain { height: 230px !important; overflow-y: auto; scrollbar-width: none; padding-top: 8px; -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 24px), transparent); mask-image: linear-gradient(to bottom, #000 calc(100% - 24px), transparent); }
+.note { font: 600 11px/1.4 "Segoe UI", system-ui, sans-serif; opacity: .55; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 6px; }
+
+.status { padding: 10px 22px 14px; font-size: 15px; font-weight: 650; opacity: .78; line-height: 1.35; }
+.status:empty { display: none; }
+.status.loading { animation: lf-pulse 1.4s ease-in-out infinite; }
+@keyframes lf-pulse { 50% { opacity: .4; } }
+.fail { display: none; align-items: center; gap: 10px; padding: 0 22px 14px; margin-top: -6px; }
+.fail.on { display: flex; }
+.detail { flex: 1; min-width: 0; font: 500 11px/1.4 "Segoe UI", system-ui, sans-serif; opacity: .55; user-select: text; }
+.retry { width: auto; height: auto; padding: 6px 12px; border-radius: 999px; background: rgba(255,255,255,.16); white-space: nowrap; }
+.retry:hover { background: rgba(255,255,255,.26); }
+
+.progress { height: 3px; margin: 2px 16px 12px; border-radius: 3px; background: rgba(255,255,255,.16); overflow: hidden; }
+.progress.hidden { visibility: hidden; }
+.bar { height: 100%; transform-origin: left; transform: scaleX(var(--p, 0)); background: rgba(255,255,255,.85); border-radius: 3px; }

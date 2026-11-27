@@ -1,5 +1,11 @@
-# El paquete para la Chrome Web Store se adjunta como "Release", no va en el repositorio.
+# El paquete para la Chrome Web Store y el ejecutable de Windows se adjuntan como "Release".
 *.zip
+dist/
+*.exe
+
+# Compilación de la app de Windows (por defecto va a %LOCALAPPDATA%, pero por si acaso)
+windows-app/bin/
+windows-app/obj/
 
 # Archivos del sistema
 Thumbs.db
